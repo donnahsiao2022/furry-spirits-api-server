@@ -54,7 +54,7 @@ public class AccountController {
 
         Account account = accountService.findAccountById(accountId);
         if (account == null) {
-            return ResponseEntity.ok("查無 ID");i;./
+            return ResponseEntity.ok("查無 ID");
         }
 
         accountService.deleteAccount(account);
