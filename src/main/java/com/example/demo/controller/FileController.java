@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.vo.DownloadRequestVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Objects;
 
 @Tag(name = "檔案")
 @RestController
@@ -28,6 +30,10 @@ public class FileController {
     public ResponseEntity<?> upload(
             @RequestPart("file") MultipartFile uploadFile) {
 
+        if (uploadFile.isEmpty()) {
+            return ResponseEntity.ok("請上傳檔案");
+        }
+
         try {
 
             File directoryPath = new File(fileBasePath);
@@ -36,7 +42,7 @@ public class FileController {
                 directoryPath.mkdirs();
             }
 
-            File file = new File(directoryPath, uploadFile.getOriginalFilename());
+            File file = new File(directoryPath, Objects.requireNonNull(uploadFile.getOriginalFilename()));
 
             file.createNewFile();
 
@@ -55,14 +61,14 @@ public class FileController {
     }
 
     @Operation(summary = "下載檔案", description = "")
-    @GetMapping("/download")
+    @PostMapping("/download")
     public ResponseEntity<?> download(
             HttpServletResponse response,
-            @RequestParam("filename") String filename) {
+            @RequestBody DownloadRequestVO downloadRequestVO) {
 
         try {
 
-            File file = new File(fileBasePath + filename);
+            File file = new File(fileBasePath + downloadRequestVO.getFilename());
 
             if (!file.exists()) {
                 return ResponseEntity.ok("fail not exists");
