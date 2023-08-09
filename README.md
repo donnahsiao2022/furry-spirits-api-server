@@ -11,3 +11,13 @@ Side Project
 
 1. mvn clean install
 2. mvn spring-boot:run
+
+##### IT人員：
+
+- 平台畫面開發：`棠棠`、`豆豆`、`Hana`、`Dana`
+- 後端技術：`球哥`
+- 後端指導：`球哥`
+
+##### UIUX人員
+
+- `Dory`
