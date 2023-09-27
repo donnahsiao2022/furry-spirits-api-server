@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11
+FROM openjdk:11.0.16-jre-slim
 USER root
 
 ARG JAR_FILE=target/*.jar
