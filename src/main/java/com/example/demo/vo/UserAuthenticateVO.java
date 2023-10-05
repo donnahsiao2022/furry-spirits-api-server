@@ -10,7 +10,7 @@ public class UserAuthenticateVO {
     @Schema(type = "java.lang.String",
             description = "帳號",
             example = "ball")
-    @JsonProperty(value = "system_id")
+    @JsonProperty(value = "name")
     private String name;
 
     @Schema(type = "java.lang.String",

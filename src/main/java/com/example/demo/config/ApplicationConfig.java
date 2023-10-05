@@ -1,8 +1,9 @@
 package com.example.demo.config;
 
 import com.example.demo.config.context.UserDetailContext;
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
+import com.example.demo.util.UserAuthorityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     @Autowired
-    UserService userService;
+    AccountService accountService;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -28,12 +29,13 @@ public class ApplicationConfig {
             @Override
             public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
-                User user = userService.findApiUserBySystemId(name);
-                if (user == null) {
+                Account account = accountService.findAccountByName(name);
+                if (account == null) {
                     return null;
                 }
 
-                return new UserDetailContext(user, null);
+                return new UserDetailContext(account,
+                        account.isAdmin() ? UserAuthorityUtils.ADMIN_ROLES : UserAuthorityUtils.USER_ROLES);
             }
         };
     }

@@ -53,13 +53,12 @@ public class WebSecurityConfiguration {
                 .permitAll()
                 .antMatchers(
                         "/swagger",
-                        "/user/v1/**",
                         "/test/v1/**",
                         "/account/**",
                         "/h2-console/**"
                 ).permitAll()
                 .antMatchers(
-                        "/admin/v1/**"
+                        "/backstage/v1/**"
                 ).hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

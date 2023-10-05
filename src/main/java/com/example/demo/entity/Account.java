@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "account")
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class User {
     private String password;
 
     @Column(name = "is_admin")
-    private boolean isAdmin = false;
+    private boolean isAdmin;
 
     @Column(name = "create_datetime")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")

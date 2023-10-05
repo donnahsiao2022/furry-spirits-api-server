@@ -1,6 +1,6 @@
 package com.example.demo.config.context;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,11 +8,11 @@ import java.util.Collection;
 
 public class UserDetailContext implements UserDetails {
 
-    private final User user;
+    private final Account account;
     private final Collection<? extends GrantedAuthority> grantedAuthorityList;
 
-    public UserDetailContext(User user, Collection<? extends GrantedAuthority> grantedAuthorityList) {
-        this.user = user;
+    public UserDetailContext(Account account, Collection<? extends GrantedAuthority> grantedAuthorityList) {
+        this.account = account;
         this.grantedAuthorityList = grantedAuthorityList;
     }
 
@@ -23,12 +23,12 @@ public class UserDetailContext implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return account.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return account.getName();
     }
 
     @Override
