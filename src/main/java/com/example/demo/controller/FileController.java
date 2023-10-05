@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.vo.DownloadRequestVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Tag(name = "檔案")
 @RestController
 @RequestMapping("/file")
+@SecurityRequirement(name = "JWT_Authentication")
 @Slf4j
 public class FileController {
 
