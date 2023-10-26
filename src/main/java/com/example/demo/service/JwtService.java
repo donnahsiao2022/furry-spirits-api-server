@@ -27,6 +27,13 @@ public class JwtService {
         return authHeader.substring(7);
     }
 
+    public String extractUsernameByRequest(HttpServletRequest request) {
+
+        String authHeader = request.getHeader("Authorization");
+
+        return extractUsername(authHeader.substring(7));
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

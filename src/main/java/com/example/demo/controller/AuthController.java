@@ -27,9 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Tag(name = "驗證 & 授權")
 @RestController
-@RequestMapping("/account/v1/")
+@RequestMapping("/auth/v1/")
 @Slf4j
-public class AccountController {
+public class AuthController {
 
     @Autowired
     AccountService accountService;
@@ -46,13 +46,15 @@ public class AccountController {
     @Autowired
     private HttpServletRequest servletRequest;
 
-    @Operation(summary = "註冊 使用者帳號", description = "")
+    @Operation(summary = "註冊-使用者帳號", description = "")
     @PostMapping("/register")
     public ResponseEntity<?> register(
             @RequestBody UserRegisterVO userRegisterVO) {
 
-        Account account = accountService.register(userRegisterVO.getName(),
-                passwordEncoder.encode(userRegisterVO.getPassword()));
+        Account account = accountService.register(
+                userRegisterVO.getName(),
+                passwordEncoder.encode(userRegisterVO.getPassword()),
+                userRegisterVO.isAdmin());
         if (account == null) {
             return ResponseEntity.ok(
                     new FailureResponse(WebError.REGISTER_FAIL));
@@ -82,6 +84,5 @@ public class AccountController {
         return ResponseEntity.ok(
                 new SuccessfullyResponse<>(response));
     }
-    
-    
+
 }

@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.back;
 
 import com.example.demo.service.AccountService;
 import com.example.demo.service.SideBarService;
@@ -10,13 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "側邊欄")
+@Tag(name = "[後台] 側邊欄")
 @RestController
-@RequestMapping("")
+@RequestMapping("/backStage/sidebar/v1")
+@SecurityRequirement(name = "JWT_Authentication")
 @Slf4j
-public class SideBarController {
+public class BackSideBarController {
 
     @Autowired
     AccountService accountService;
@@ -24,9 +27,8 @@ public class SideBarController {
     @Autowired
     SideBarService sideBarService;
 
-    @SecurityRequirement(name = "JWT_Authentication")
-    @Operation(summary = "後台 sidebar", description = "")
-    @GetMapping("/backStage/v1/sidebar/list")
+    @Operation(summary = "列表", description = "")
+    @GetMapping("/list")
     public ResponseEntity<?> getBackStageSidebar() {
 
         if (!accountService.isAccountAdmin()) {
@@ -37,11 +39,4 @@ public class SideBarController {
                 new SuccessfullyResponse<>(sideBarService.findBackStageSideBar()));
     }
 
-    @Operation(summary = "首頁 sidebar", description = "")
-    @GetMapping("/frontStage/v1/sidebar/list")
-    public ResponseEntity<?> getFrontStageSidebar() {
-
-        return ResponseEntity.ok(
-                new SuccessfullyResponse<>(""));
-    }
 }

@@ -12,7 +12,8 @@ public enum WebError {
     DATA_ALREADY_EXIST(1002, "資料已存在"),
     DATE_FORMAT_EXCEPTION(1003, "日期格式錯誤"),
     DATA_ISSUE_EXCEPTION(1004, "檔案異常"),
-    DATA_FILE_NOT_FOUND_EXCEPTION(1005, "檔案不存在");
+    DATA_FILE_NOT_FOUND_EXCEPTION(1005, "檔案不存在"),
+    PRODUCT_NOT_FOUND(2000, "產品不存在");
 
     private final Integer code;
     private final String message;

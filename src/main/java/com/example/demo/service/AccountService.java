@@ -31,7 +31,7 @@ public class AccountService {
         return isAdmin;
     }
 
-    public Account register(String name, String password) {
+    public Account register(String name, String password, boolean isAdmin) {
 
         Account account;
 
@@ -44,6 +44,7 @@ public class AccountService {
         account.setName(name);
         account.setPassword(password);
         account.setCreateDatetime(new Date());
+        account.setAdmin(isAdmin);
 
         accountRepository.save(account);
 

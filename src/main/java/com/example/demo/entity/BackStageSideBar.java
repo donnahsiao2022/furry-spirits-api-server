@@ -20,6 +20,9 @@ public class BackStageSideBar {
     @Column(name = "parent_id")
     private int parentId;
 
+    @Column(name = "path")
+    private String path;
+
     @Column(name = "seq")
     private int seq;
 
