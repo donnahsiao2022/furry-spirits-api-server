@@ -63,7 +63,7 @@ public class OrderService {
         return order;
     }
 
-    public List<Order> queryList(QueryOrderListVO queryOrderListVO) throws ParseException {
+    public Page<Order> queryList(QueryOrderListVO queryOrderListVO) throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.WEB_DATE_FORMAT);
         Pageable pageable = PageRequest.of(queryOrderListVO.getPage() - 1, queryOrderListVO.getSize());
@@ -74,6 +74,6 @@ public class OrderService {
                 simpleDateFormat.parse(queryOrderListVO.getEndDatetime()),
                 pageable);
 
-        return orderPage.getContent();
+        return orderPage;
     }
 }

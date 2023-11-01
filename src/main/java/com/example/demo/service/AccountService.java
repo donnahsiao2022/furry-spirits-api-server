@@ -31,6 +31,10 @@ public class AccountService {
         return isAdmin;
     }
 
+    public boolean isAccountAdminByAccountName(String accountName) {
+        return accountRepository.findAccountByName(accountName).isAdmin();
+    }
+
     public Account register(String name, String password, boolean isAdmin) {
 
         Account account;

@@ -2,7 +2,7 @@ package com.example.demo.vo.util;
 
 import com.example.demo.entity.Order;
 import com.example.demo.enums.OrderStatus;
-import com.example.demo.vo.web.WebOrderListVO;
+import com.example.demo.vo.WebOrderListVO;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;

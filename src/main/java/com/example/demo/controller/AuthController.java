@@ -79,6 +79,7 @@ public class AuthController {
         String jwtToken = jwtService.generateToken(userAuthenticateVO.getName());
 
         ObjectNode response = new ObjectNode(JsonNodeFactory.instance);
+        response.put("is_admin", accountService.isAccountAdminByAccountName(userAuthenticateVO.getName()));
         response.put("token", jwtToken);
 
         return ResponseEntity.ok(

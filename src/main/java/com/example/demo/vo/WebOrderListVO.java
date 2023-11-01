@@ -1,4 +1,4 @@
-package com.example.demo.vo.web;
+package com.example.demo.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
