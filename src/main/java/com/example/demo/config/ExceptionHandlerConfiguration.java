@@ -33,6 +33,18 @@ public class ExceptionHandlerConfiguration {
         return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(dateFormatException));
     }
 
+    @ExceptionHandler(FileUploadFailException.class)
+    public Object fileUploadFailException(FileUploadFailException fileUploadFailException) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(fileUploadFailException));
+    }
+
+    @ExceptionHandler(FileDownloadFailException.class)
+    public Object fileDownloadFailException(FileDownloadFailException fileDownloadFailException) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(fileDownloadFailException));
+    }
+
     @ExceptionHandler(NullPointerException.class)
     public Object nullPointerExceptionHandler(NullPointerException nullPointerException) {
 

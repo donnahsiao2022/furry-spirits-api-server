@@ -22,9 +22,6 @@ public class OrderDetail {
     @Column(name = "order_id")
     private int orderId;
 
-    @Column(name = "status")
-    private int status;
-
     @Column(name = "product_id")
     private int productId;
 
