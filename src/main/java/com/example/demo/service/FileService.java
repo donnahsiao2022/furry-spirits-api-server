@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.config.exception.FileNotFoundException;
+import com.example.demo.config.exception.CustomizeException;
+import com.example.demo.enums.WebError;
 import com.example.demo.vo.DownloadRequestVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,7 +53,7 @@ public class FileService {
         File file = new File(fileBasePath + downloadRequestVO.getFilename());
 
         if (!file.exists()) {
-            throw new FileNotFoundException();
+            throw new CustomizeException(WebError.DATA_FILE_NOT_FOUND_EXCEPTION);
         }
 
         return Files.newInputStream(file.toPath());

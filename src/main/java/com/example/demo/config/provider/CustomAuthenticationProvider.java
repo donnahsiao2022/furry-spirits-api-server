@@ -25,10 +25,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) {
 
-        String getUsername = authentication.getName();
+        String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(getUsername);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (userDetails == null) {
             throw new UsernameNotFoundException("");
         }

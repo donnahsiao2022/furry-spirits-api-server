@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.exception.FileDownloadFailException;
-import com.example.demo.config.exception.FileUploadFailException;
+import com.example.demo.config.exception.CustomizeException;
+import com.example.demo.enums.WebError;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.FileService;
 import com.example.demo.vo.DownloadRequestVO;
@@ -45,11 +45,11 @@ public class FileController {
         }
 
         if (uploadFile.isEmpty()) {
-            throw new FileUploadFailException();
+            throw new CustomizeException(WebError.FILE_UPLOAD_FAIL);
         }
 
         if (!fileService.uploadFile(uploadFile)) {
-            throw new FileUploadFailException();
+            throw new CustomizeException(WebError.FILE_UPLOAD_FAIL);
         }
 
         return ResponseEntity.ok(
@@ -78,7 +78,7 @@ public class FileController {
             outputStream.close();
 
         } catch (IOException e) {
-            throw new FileDownloadFailException();
+            throw new CustomizeException(WebError.FILE_DOWNLOAD_FAIL);
         }
 
         return ResponseEntity.ok(

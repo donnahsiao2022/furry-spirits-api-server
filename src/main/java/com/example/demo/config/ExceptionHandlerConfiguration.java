@@ -15,34 +15,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class ExceptionHandlerConfiguration {
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public Object dataNotFoundHandler(DataNotFoundException dataNotFoundException) {
+    @ExceptionHandler(BaseException.class)
+    public Object baseException(BaseException baseException) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(dataNotFoundException));
-    }
-
-    @ExceptionHandler(DataAlreadyExistException.class)
-    public Object dataAlreadyExistException(DataAlreadyExistException dataAlreadyExistException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(dataAlreadyExistException));
-    }
-
-    @ExceptionHandler(DateFormatException.class)
-    public Object dateFormatException(DateFormatException dateFormatException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(dateFormatException));
-    }
-
-    @ExceptionHandler(FileUploadFailException.class)
-    public Object fileUploadFailException(FileUploadFailException fileUploadFailException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(fileUploadFailException));
-    }
-
-    @ExceptionHandler(FileDownloadFailException.class)
-    public Object fileDownloadFailException(FileDownloadFailException fileDownloadFailException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(fileDownloadFailException));
+        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(baseException));
     }
 
     @ExceptionHandler(NullPointerException.class)
@@ -62,19 +38,6 @@ public class ExceptionHandlerConfiguration {
     public Object expiredJwtExceptionHandler(ExpiredJwtException expiredJwtException) {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-    }
-
-
-    @ExceptionHandler(FileNotFoundException.class)
-    public Object fileNotFoundException(FileNotFoundException fileNotFoundException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(fileNotFoundException));
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public Object productNotFoundException(ProductNotFoundException productNotFoundException) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(getResponseBody(productNotFoundException));
     }
 
     private JsonNode getResponseBody(BaseException ex) {

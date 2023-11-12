@@ -1,7 +1,8 @@
 package com.example.demo.controller.back;
 
-import com.example.demo.config.exception.DateFormatException;
+import com.example.demo.config.exception.CustomizeException;
 import com.example.demo.entity.Order;
+import com.example.demo.enums.WebError;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.OrderService;
 import com.example.demo.vo.QueryOrderListVO;
@@ -55,7 +56,7 @@ public class BackOrderController {
             orderPage = orderService.queryList(queryOrderListVO);
 
         } catch (ParseException e) {
-            throw new DateFormatException();
+            throw new CustomizeException(WebError.DATE_FORMAT_EXCEPTION);
         }
 
         return ResponseEntity.ok(

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.config.auditor.CustomAuditorAware;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
@@ -26,14 +27,23 @@ import java.util.UUID;
 public class OrderService {
 
     @Autowired
+    CustomAuditorAware customAuditorAware;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
     IOrderRepository orderRepository;
 
     @Autowired
     IOrderDetailRepository orderDetailRepository;
 
-    public Order create(Account account, List<OrderDetailVO> orderDetailVOList) {
+    public Order create(List<OrderDetailVO> orderDetailVOList) {
 
         LocalDateTime now = LocalDateTime.now();
+
+        Account account = accountService.findAccountByName(
+                customAuditorAware.getCurrentAuditor().orElse(""));
 
         Order order = new Order();
         order.setNumber(UUID.randomUUID().toString().replace("-", ""));
@@ -68,12 +78,10 @@ public class OrderService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.WEB_DATE_FORMAT);
         Pageable pageable = PageRequest.of(queryOrderListVO.getPage() - 1, queryOrderListVO.getSize());
 
-        Page<Order> orderPage = orderRepository.findOrderPageByCondition(
+        return orderRepository.findOrderPageByCondition(
                 queryOrderListVO.getOrderNumber(),
                 simpleDateFormat.parse(queryOrderListVO.getStartDatetime()),
                 simpleDateFormat.parse(queryOrderListVO.getEndDatetime()),
                 pageable);
-
-        return orderPage;
     }
 }

@@ -15,7 +15,8 @@ public enum WebError {
     FILE_UPLOAD_FAIL(1005, "檔案上傳失敗"),
     FILE_DOWNLOAD_FAIL(1006, "檔案下載失敗"),
     DATA_FILE_NOT_FOUND_EXCEPTION(1005, "檔案不存在"),
-    PRODUCT_NOT_FOUND(2000, "產品不存在");
+    PRODUCT_NOT_FOUND(2000, "產品不存在"),
+    PRODUCT_IS_EXIST(2001, "產品名稱已存在");
 
     private final Integer code;
     private final String message;

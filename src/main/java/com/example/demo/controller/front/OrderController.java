@@ -1,9 +1,10 @@
 package com.example.demo.controller.front;
 
-import com.example.demo.config.exception.ProductNotFoundException;
+import com.example.demo.config.exception.CustomizeException;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.Product;
+import com.example.demo.enums.WebError;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.JwtService;
 import com.example.demo.service.OrderService;
@@ -36,15 +37,6 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @Autowired
-    AccountService accountService;
-
-    @Autowired
-    JwtService jwtService;
-
-    @Autowired
-    HttpServletRequest servletRequest;
-
     @Operation(summary = "建立訂單", description = "")
     @PostMapping("/create")
     public ResponseEntity<?> create(
@@ -53,16 +45,12 @@ public class OrderController {
         createOrderVO.getOrderDetailVOList().forEach(orderDetailVO -> {
             Product product = productService.findById(orderDetailVO.getProductId());
             if (product == null) {
-                throw new ProductNotFoundException();
+                throw new CustomizeException(WebError.PRODUCT_NOT_FOUND);
             }
             orderDetailVO.setProduct(product);
         });
 
-        Account account = accountService.findAccountByName(
-                jwtService.extractUsernameByRequest(servletRequest));
-
         Order order = orderService.create(
-                account,
                 createOrderVO.getOrderDetailVOList());
 
         return ResponseEntity.ok(
